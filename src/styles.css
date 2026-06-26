@@ -1,0 +1,354 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@font-face {
+  font-family: "Inter Local";
+  src: local("Inter");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Local";
+  src: local("JetBrains Mono");
+  font-display: swap;
+}
+
+/* ===== Design tokens (locked from uploads) ===== */
+@theme {
+  --color-arctic: #f1f6f4;
+  --color-mint: #d9e8e2;
+  --color-forsythia: #ffc801;
+  --color-saffron: #ff9932;
+  --color-nocturnal: #114c5a;
+  --color-noir: #172b36;
+
+  --font-sans: "Inter Local", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:
+    "JetBrains Mono Local", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "Inter Local", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #172b36;
+  --fg: #f1f6f4;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+* {
+  border-color: rgba(241, 246, 244, 0.08);
+}
+
+/* ===== Utilities ===== */
+@utility font-mono {
+  font-family: var(--font-mono);
+}
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+}
+
+/* Hatched ▨ section icon */
+@utility hatch {
+  background-image: repeating-linear-gradient(45deg, currentColor 0 1.5px, transparent 1.5px 5px);
+}
+
+/* ===== Reveal-on-scroll system (CSS only, IO toggles .in) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 380ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 380ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 60ms);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero entrance — runs once, total <= 500ms */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-rise {
+  opacity: 0;
+  animation: hero-rise 420ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.draw-line {
+  transform-origin: left;
+  animation: draw-line 480ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+/* Accordion native open/close (no JS height) */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.acc-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.acc-panel > .acc-inner {
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 220ms ease-out 60ms;
+}
+.acc-panel[data-open="true"] > .acc-inner {
+  opacity: 1;
+}
+
+/* Segmented control slider */
+.seg-knob {
+  transition:
+    transform 200ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    width 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Subtle noise overlay for hero */
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-forsythia);
+  color: var(--color-noir);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-forsythia);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== 3D + motion system ===== */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+.float-slow {
+  animation: float-y 7s ease-in-out infinite;
+}
+.float-fast {
+  animation: float-y 4.5s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 28s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--color-forsythia);
+  animation: pulse-ring 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.gradient-pan {
+  background: linear-gradient(
+    120deg,
+    var(--color-nocturnal),
+    var(--color-forsythia),
+    var(--color-saffron),
+    var(--color-nocturnal)
+  );
+  background-size: 300% 300%;
+  animation: gradient-pan 14s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 200, 1, 0.18), transparent);
+  animation: shimmer 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 3D card tilt — driven by JS-set --rx / --ry */
+.tilt-3d {
+  transform-style: preserve-3d;
+  transition:
+    transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 280ms ease-out;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(0);
+}
+.tilt-3d:hover {
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 200, 1, 0.18);
+}
+.tilt-3d > * {
+  transform: translateZ(20px);
+}
+.tilt-3d .tilt-deep {
+  transform: translateZ(40px);
+}
+
+/* Spotlight that follows cursor — driven by --mx / --my */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 200, 1, 0.16),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 220ms ease-out;
+  pointer-events: none;
+  z-index: 0;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Marquee blur fade edges */
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+/* Animated underline */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 320ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

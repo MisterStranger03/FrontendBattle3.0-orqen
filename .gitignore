@@ -1,0 +1,130 @@
+.DS_Store
+node_modules/
+venv/
+.venv/
+.tanstack/
+dist/
+build/
+coverage/
+.vite/
+*.log
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.idea/
+.vscode/
+venv
+.lovable
+.DS_Store
+plan.md
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Package manager locks (keep only one - uncomment the one you use)
+# package-lock.json   # uncomment if using npm
+# yarn.lock           # uncomment if using yarn
+# bun.lock is usually kept, but if you want to ignore it:
+# bun.lock
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Lovable platform files (if you don't want to track these)
+# plan.md
+# project.json
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-debug.log*
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+
+# Build outputs - all of these are showing up in your changes
+.output/
+dist/
+build/
+.next/
+out/
+.nuxt/
+
+# Wrangler / Cloudflare deploy
+.wrangler/
+wrangler.json
+
+# Package manager
+# bun.lock - keep this committed
+# package-lock.json - pick one, don't commit both
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Lovable platform files
+plan.md
+project.json
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+bun-debug.log*
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Testing
+coverage/
+
+# Misc
+*.tsbuildinfo
