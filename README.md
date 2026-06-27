@@ -2,7 +2,7 @@
 
 > Built for **Frontend Battle 3.0** · Qualified for the Finale (Round 2) on 28th June 2026.
 
-A landing page built for **Frontend Battle 3.0 - Vibecoding Competition** hosted by IIT Bhubaneswar on [Unstop](https://unstop.com/hackathons/frontend-battle-30-vibecoding-competition-indian-institute-of-technology-bhubaneswar-1696294).
+A landing page built for **Frontend Battle 3.0 - Competition** hosted by IIT Bhubaneswar on [Unstop](https://unstop.com/hackathons/frontend-battle-30-vibecoding-competition-indian-institute-of-technology-bhubaneswar-1696294).
 
 ## About the Competition
 
